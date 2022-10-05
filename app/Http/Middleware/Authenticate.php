@@ -14,11 +14,8 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (!$request->expectsJson()) {
-            //Vérifier si la requête contient le prefix lb_admin
-            session()->flash('error', 'Connectez-vous pour avoir accès à cette ressource !');
-            return route('login.form');
-            //sinon le laisser passer au front
+        if (! $request->expectsJson()) {
+            return route('login');
         }
     }
 }

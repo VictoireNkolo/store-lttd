@@ -7,10 +7,6 @@
 
     <!-- Icon Cards-->
 
-    <list-user
-        :users="{{ json_encode($users) }}"
-    >
-
-    </list-user>
+    <p>welcome to backend</p>
 
 @endsection
