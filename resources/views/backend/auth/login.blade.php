@@ -1,10 +1,15 @@
 @extends('backend.layout.auth')
 
-@section('title', 'Connexion | LaraBlog')
+@section('title', 'Connexion | LTDD Aministration')
 
 @section('content')
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Connexion</div>
+        <div class="card-header text-center">
+            <i class="fa fa-fw fa-user-secret"></i>
+            <span class="nav-link-text">
+                Connexion
+            </span>
+        </div>
         <div class="card-body">
             @if(session()->exists('error'))
                 <div class="alert alert-danger">{{ session()->get('error') }}</div>
@@ -15,15 +20,32 @@
             <form action="{{ route('login.save') }}" method="post">
                 @csrf
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input class="form-control @error('email') is-invalid @enderror"  value="{{ old('email') }}" type="email"  name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                    <label for="email">
+                        <i class="fa fa-fw fa-envelope text-primary"></i>
+                        <span class="nav-link-text">
+                            Email
+                        </span>
+                    </label>
+                    <input
+                        class="form-control @error('email') is-invalid @enderror"  value="{{ old('email') }}"
+                        type="email"  name="email" aria-describedby="emailHelp" placeholder="Enter email"
+                        id="email" required
+                    >
                     @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Mot de passe</label>
-                    <input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" required>
+                    <label for="password">
+                        <i class="fa fa-fw fa-lock text-primary"></i>
+                        <span class="nav-link-text">
+                            Password
+                        </span>
+                    </label>
+                    <input
+                        class="form-control @error('password') is-invalid @enderror" type="password"
+                        placeholder="Password" name="password" id="password" required
+                    >
                     @error('password')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

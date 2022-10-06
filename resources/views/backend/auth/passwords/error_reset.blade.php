@@ -1,6 +1,6 @@
 @extends('backend.layout.auth')
 
-@section('title', 'Erreur | LaraBlog')
+@section('title', 'Erreur | LTDD Administration')
 
 @section('content')
 

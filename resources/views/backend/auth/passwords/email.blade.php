@@ -1,6 +1,6 @@
 @extends('backend.layout.auth')
 
-@section('title', 'Password reset | LaraBlog')
+@section('title', 'Password reset | LTDD Administration')
 
 @section('content')
     <div class="card card-register mx-auto mt-5">
@@ -16,7 +16,7 @@
                 <div class="text-center mt-4 mb-5">
                     <h4>Mot de passe oubli&eacute;?</h4>
                     <p>
-                        Entrez votre addresse email et nous vous enverrons un mail avec les instructions &agrave;&nbsp;suivre pour r&eacute;initialiser
+                        Entrez votre adresse email et nous vous enverrons un mail avec les instructions &agrave;&nbsp;suivre pour r&eacute;initialiser
                         votre mot de passe.
                     </p>
                 </div>

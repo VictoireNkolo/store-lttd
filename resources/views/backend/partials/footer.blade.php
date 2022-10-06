@@ -2,7 +2,9 @@
 <footer class="sticky-footer">
     <div class="container">
         <div class="text-center">
-            <small>Copyright © Lara-Blog 2020</small>
+            <a target="_blank" class="text-facebook font-weight-semi-bold" href="https://github.com/VictoireNkolo">
+                <small>Copyright © CrinaSoft 2022</small> | <em>Victoire Nkolo</em>
+            </a>
         </div>
     </div>
 </footer>

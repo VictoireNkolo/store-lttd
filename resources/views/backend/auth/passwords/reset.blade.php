@@ -1,6 +1,6 @@
 @extends('backend.layout.auth')
 
-@section('title', 'nouveau mot de passe | LaraBlog')
+@section('title', 'Nouveau mot de passe | LTDD Administration')
 
 @section('content')
 

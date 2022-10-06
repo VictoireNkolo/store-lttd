@@ -58,9 +58,9 @@
     <div class="row border-top border-light mx-xl-5 py-4">
         <div class="col-md-6 px-xl-0">
             <p class="mb-md-0 text-center text-md-left text-footer">
-                &copy; <a class="text-footer font-weight-semi-bold" href="#">LTDD, Tchatto Mballa</a>. All Rights Reserved. Designed
-                by
-                <a class="text-facebook font-weight-semi-bold" href="#"><em>Victoire Nkolo</em></a>
+                &copy; <a class="text-footer font-weight-semi-bold" href="#">LTDD, Tchatto Mballa</a>. All Rights Reserved.
+                Powered by :
+                <a target="_blank" class="text-facebook font-weight-semi-bold" href="https://github.com/VictoireNkolo"><em>Victoire Nkolo</em></a>
             </p>
         </div>
         <div class="col-md-6 px-xl-0 text-center text-md-right">

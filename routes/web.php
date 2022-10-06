@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\WebSiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,10 +43,10 @@ Route::middleware('guest')->group(static function () {
     Route::get('/lbadmin', [LoginController::class, 'showLoginForm']);
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
     Route::middleware('throttle:5,5')->post('/login', [LoginController::class, 'saveLogin'])->name('login.save');
-    Route::get('/password/reset', [LoginController::class, 'showLinkRequestForm'])->name('password.request');
-    Route::post('/password/email', [LoginController::class, 'sendResetLinkEmail'])->name('password.email');
-    Route::get('/password/reset/{token}', [LoginController::class, 'showResetForm'])->name('reset.form');
-    Route::post('/password/reset', [LoginController::class, 'reset'])->name('password.update');
+    Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset.form');
+    Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
 });
