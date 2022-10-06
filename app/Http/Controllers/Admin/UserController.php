@@ -26,7 +26,7 @@ class UserController extends Controller
         return view('backend.admin.users.index', ['users' => $users]);
     }
 
-    public function new()
+    public function create()
     {
         return view('backend.admin.users.new');
     }

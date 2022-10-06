@@ -1,6 +1,6 @@
 @extends('backend.layout.dashboard')
 
-@section('title', 'Gestion des catégories | MOB')
+@section('title', 'Gestion des catégories | LTDD Administration')
 @section('dashboard_section', 'Categories')
 
 @section('content')

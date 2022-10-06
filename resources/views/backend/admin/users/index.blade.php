@@ -18,8 +18,9 @@
     </div>
 
     <div class="card mb-3">
-        <div class="card-header">
-            <i class="fa fa-table"></i> Liste des utilisateurs</div>
+        <div class="card-header text-primary">
+            <i class="fa fa-users"></i> Liste des utilisateurs
+        </div>
         <div class="card-body">
             @if(session()->exists('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
@@ -79,7 +80,7 @@
             </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">blablabla here</div>
+        <div class="card-footer small text-muted">Gestion des utilisateurs</div>
     </div>
 
     {{ $users->links() }}

@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\WebSiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +65,7 @@ Route::group(
     ],
     static function () {
         //Routes that concern all users connected
-        Route::get('/logout', 'Auth\LoginController@logout')->name('lb_admin.logout');
+        Route::get('/logout', [LoginController::class, 'logout'])->name('lb_admin.logout');
 
         //User's routes
         Route::group(
@@ -70,8 +74,8 @@ Route::group(
                 'prefix' => 'user',
             ],
             static function () {
-                Route::get('/', 'User\DashboardController@index')->name('lb_admin.user.dashboard.index');
-                Route::get('home', 'User\DashboardController@index');
+                Route::get('/', [UserDashboardController::class, 'index'])->name('lb_admin.user.dashboard.index');
+                Route::get('home', [UserDashboardController::class, 'index']);
                 Route::get('categories', 'User\CategoryController@index')->name('lb_admin.user.category.index');
                 Route::get('posts/{user_id}', 'User\PostController@getUserPosts')->name('lb_admin.user.post.get_user_posts'); // to complete
             }
@@ -84,21 +88,21 @@ Route::group(
                 'prefix' => 'admin',
             ],
             static function () {
-                Route::get('', 'Admin\DashboardController@index');
-                Route::get('home', 'Admin\DashboardController@index')->name('lb_admin.admin.dashboard.index');
+                Route::get('', [DashboardController::class, 'index']);
+                Route::get('home', [DashboardController::class, 'index'])->name('lb_admin.admin.dashboard.index');
 
-                Route::get('users', 'Admin\UserController@index')->name('lb_admin.admin.user.index');
-                Route::get('user/new', 'Admin\UserController@new')->name('lb_admin.admin.user.new');
-                Route::get('user/{id}/delete', 'Admin\UserController@delete')->name('lb_admin.admin.user.delete');
-                Route::post('user/store', 'Admin\UserController@store')->name('lb_admin.admin.user.store');
+                Route::get('users', [UserController::class, 'index'])->name('lb_admin.admin.user.index');
+                Route::get('user/new', [UserController::class, 'create'])->name('lb_admin.admin.user.new');
+                Route::get('user/{id}/delete', [UserController::class, 'delete'])->name('lb_admin.admin.user.delete');
+                Route::post('user/store', [UserController::class, 'store'])->name('lb_admin.admin.user.store');
 
-                Route::get('categories', 'Admin\CategoryController@index')->name('lb_admin.admin.category.index');
-                Route::get('category/create', 'Admin\CategoryController@create')->name('lb_admin.admin.category.create');
-                Route::post('category/store', 'Admin\CategoryController@store')->name('lb_admin.admin.category.store');
-                Route::get('category/{id}', 'Admin\CategoryController@show')->name('lb_admin.admin.category.show');
-                Route::get('category/{id}/edit', 'Admin\CategoryController@edit')->name('lb_admin.admin.category.edit');
-                Route::post('category/update', 'Admin\CategoryController@update')->name('lb_admin.admin.category.update');
-                Route::get('category/{id}/delete', 'Admin\CategoryController@delete')->name('lb_admin.admin.category.delete');
+                Route::get('categories', [CategoryController::class, 'index'])->name('lb_admin.admin.category.index');
+                Route::get('category/create', [CategoryController::class, 'create'])->name('lb_admin.admin.category.create');
+                Route::post('category/store', [CategoryController::class, 'store'])->name('lb_admin.admin.category.store');
+                Route::get('category/{id}', [CategoryController::class, 'show'])->name('lb_admin.admin.category.show');
+                Route::get('category/{id}/edit', [CategoryController::class, 'edit'])->name('lb_admin.admin.category.edit');
+                Route::post('category/update', [CategoryController::class, 'update'])->name('lb_admin.admin.category.update');
+                Route::get('category/{id}/delete', [CategoryController::class, 'delete'])->name('lb_admin.admin.category.delete');
 
                 Route::get('posts', 'Admin\PostController@index')->name('lb_admin.admin.posts.index');
                 Route::get('category/{slug}/posts', 'Admin\PostController@index')->name('lb_admin.admin.posts.category');
