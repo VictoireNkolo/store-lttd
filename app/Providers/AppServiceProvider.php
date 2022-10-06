@@ -65,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer([
             'frontend.pages.blog',
             'frontend.pages.shop',
+            'frontend.pages.index',
         ], function ($view) {
             $view->with('categories', Category::all());
         });

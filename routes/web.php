@@ -19,19 +19,19 @@ use Illuminate\Support\Facades\Route;
  * Frontend routes (web site) not connected
  */
 Route::get('/', [WebSiteController::class, 'index']);
-Route::get('home', 'WebSiteController@index')->name('home');
-Route::get('a-propos', 'WebSiteController@a_propos')->name('a-propos');
-Route::get('nos-services', 'WebSiteController@nos_services')->name('nos-services');
-Route::get('nos-realisations', 'WebSiteController@nos_realisations')->name('nos-realisations');
-Route::get('contact', 'WebSiteController@contact')->name('contact');
-Route::get('boutique', 'WebSiteController@shop')->name('boutique');
-Route::get('boutique/{slug}/produits', 'WebSiteController@shop')->name('shop_category_products');
-Route::get('boutique/produit/{id}', 'WebSiteController@shop_product_details')->name('shop_product_details');
-Route::get('blog', 'WebSiteController@blog')->name('blog');
+Route::get('home', [WebSiteController::class, 'index'])->name('home');
+Route::get('a-propos', [WebSiteController::class, 'a_propos'])->name('a-propos');
+Route::get('nos-services', [WebSiteController::class, 'nos_services'])->name('nos-services');
+Route::get('nos-realisations', [WebSiteController::class, 'nos_realisations'])->name('nos-realisations');
+Route::get('contact', [WebSiteController::class, 'contact'])->name('contact');
+Route::get('boutique', [WebSiteController::class, 'shop'])->name('boutique');
+Route::get('boutique/{slug}/produits', [WebSiteController::class, 'shop'])->name('shop_category_products');
+Route::get('boutique/produit/{id}', [WebSiteController::class, 'shop_product_details'])->name('shop_product_details');
+Route::get('blog', [WebSiteController::class, 'blog'])->name('blog');
 
-//Frent-end routes when connected
+//Front-end routes when connected
 Route::middleware('auth')->group(static function () {
-    Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 /**
