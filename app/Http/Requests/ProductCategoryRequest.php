@@ -1,10 +1,12 @@
 <?php
 
+
 namespace App\Http\Requests;
+
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class ProductCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +25,7 @@ class CategoryRequest extends FormRequest
             'name.unique'      => 'Cette catégorie existe déjà !',
             'name.max' => 'Nom de catégorie trop long',
             'description.required' => 'Veuillez renseigner la description',
+            'icon.required' => 'Veuillez renseigner l\'icône',
         ];
     }
 
@@ -36,6 +39,7 @@ class CategoryRequest extends FormRequest
         return [
             'name'  => 'required|max:255|unique:categories,name,' . $this->id . ',id',
             'description'   => 'required',
+            'icon'   => 'required',
         ];
     }
 

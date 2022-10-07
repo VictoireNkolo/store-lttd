@@ -83,6 +83,5 @@
         <div class="card-footer small text-muted">Gestion des utilisateurs</div>
     </div>
 
-    {{ $users->links() }}
 
 @endsection

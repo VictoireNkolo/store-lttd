@@ -1,7 +1,7 @@
 @extends('backend.layout.dashboard')
 
-@section('title', 'Gestion des catégories-articles | LTDD Administration')
-@section('dashboard_section', 'Catégories d\'articles')
+@section('title', 'Gestion des catégories de produits | LTDD Administration')
+@section('dashboard_section', 'Catégories de produits')
 
 @section('content')
 
@@ -9,8 +9,8 @@
         <div class="col col-lg-12">
             <section class="card">
                 <div class="card-body text-secondary">
-                <a href="{{ route('lb_admin.admin.category.create') }}" class="btn btn-primary" >
-                    <i class="fa fa-plus-square"></i>&nbsp; Ajouter une cat&eacute;gorie d'articles
+                <a href="{{ route('lb_admin.admin.product_category.create') }}" class="btn btn-primary" >
+                    <i class="fa fa-plus-square"></i>&nbsp; Ajouter une cat&eacute;gorie de produits
                 </a>
                 </div>
             </section>
@@ -19,7 +19,7 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            <i class="fa fa-table"></i> Liste des cat&eacute;gories d'articles</div>
+            <i class="fa fa-table"></i> Liste des cat&eacute;gories de produits</div>
         <div class="card-body">
             @if(session()->exists('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
@@ -48,19 +48,19 @@
                 </tr>
                 </tfoot>
                 <tbody>
-                @foreach ($categories as $category)
+                @foreach ($productCategories as $productCategory)
                     <tr>
                     <td> {{ $loop->iteration }} </td>
-                    <td>{{$category->name}}</td>
-                    <td>{{$category->slug}}</td>
+                    <td>{{$productCategory->name}}</td>
+                    <td>{{$productCategory->slug}}</td>
                     <td>
-                        {!! $category->is_active ? '<i class="fa fa-thumbs-up text-primary"></i>' : '<i class="fa fa-thumbs-down text-danger"></i>' !!}
+                        {!! $productCategory->is_active ? '<i class="fa fa-thumbs-up text-primary"></i>' : '<i class="fa fa-thumbs-down text-danger"></i>' !!}
                     </td>
                     <td class="text-center">
-                        <a href="{{ route('lb_admin.admin.category.edit', $category->id) }}" title="Modifier">
+                        <a href="{{ route('lb_admin.admin.product_category.edit', $productCategory->id) }}" title="Modifier">
                             <i class="fa fa-edit text-primary"></i>
                         </a> -
-                        <a href="{{ route('lb_admin.admin.category.show', $category->id) }}" title="Détails">
+                        <a href="{{ route('lb_admin.admin.product_category.show', $productCategory->id) }}" title="Détails">
                             <i class="fa fa-eye text-success"></i>
                         </a> -
                         <a data-toggle="modal" data-target="#deleteModal" title="Supprimer">
@@ -68,13 +68,13 @@
                         </a>
                     </td>
                     </tr>
-                    @include('backend.partials.deleteModal', ['route' => 'lb_admin.admin.category.delete', 'elementId' => $category->id ])
+                    @include('backend.partials.deleteModal', ['route' => 'lb_admin.admin.product_category.delete', 'elementId' => $productCategory->id ])
                 @endforeach
                 </tbody>
             </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">Gestion des cat&eacute;gories des articles</div>
+        <div class="card-footer small text-muted">Gestion des cat&eacute;gories de produits</div>
     </div>
 
 @endsection

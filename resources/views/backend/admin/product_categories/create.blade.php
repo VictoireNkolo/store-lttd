@@ -1,7 +1,7 @@
 @extends('backend.layout.dashboard')
 
-@section('title', 'Ajouter une catégorie d\'articles | LTDD Administration')
-@section('dashboard_section', 'Nouvelle catégorie d\'articles')
+@section('title', 'Ajouter une catégorie | LTDD Administration')
+@section('dashboard_section', 'Nouvelle catégorie de produits')
 
 @section('content')
 
@@ -9,8 +9,8 @@
         <div class="col col-lg-12">
             <section class="card">
                 <div class="card-body text-secondary">
-                    <a href="{{ route('lb_admin.admin.category.index') }}" class="btn btn-primary" >
-                        <i class="fa fa-arrow-left"></i>&nbsp; Retour à la liste des cat&eacute;gories pour articles
+                    <a href="{{ route('lb_admin.admin.product_category.index') }}" class="btn btn-primary" >
+                        <i class="fa fa-arrow-left"></i>&nbsp; Retour à la liste des cat&eacute;gories de produits
                     </a>
                 </div>
             </section>
@@ -18,12 +18,12 @@
     </div>
 
     <div class="card card-register mx-auto mt-3">
-        <div class="card-header">Nouvelle cat&eacute;gorie d'artcicle</div>
+        <div class="card-header">Nouvelle cat&eacute;gorie de produits</div>
         <div class="card-body">
             @if(session()->exists('error'))
                 <div class="alert alert-danger">{{ session()->get('error') }}</div>
             @endif
-            <form action="{{ route('lb_admin.admin.category.store') }}" method="post">
+            <form action="{{ route('lb_admin.admin.product_category.store') }}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="name">
@@ -38,6 +38,21 @@
                     >
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="icon">
+                        <i class="fa fa-fw fa-edit text-primary"></i>
+                        <span class="nav-link-text">
+                            Ic&ocirc;ne
+                        </span>
+                    </label>
+                    <input
+                        class="form-control @error('icon') is-invalid @enderror" value="{{ old('icon') }}"
+                        type="text" name="icon" id="icon" placeholder="Ic&ocirc;ne" required
+                    >
+                    @error('icon')
+                    <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">

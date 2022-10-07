@@ -12,7 +12,7 @@
                 <i class="fa fa-newspaper-o"></i><strong>&nbsp;{{ $post->title }}</strong>
             </div>
             <div class="card-body">
-                <div class="row">
+                <div class="text-secondary">
                     <div class="text-justify">{{ $post->description }}</div>
                 </div>
                 <hr class="mt-2">

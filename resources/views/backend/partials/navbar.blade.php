@@ -34,24 +34,16 @@
                     <a class="nav-link" href="{{ route('lb_admin.admin.pages.index') }}">
                         <i class="fa fa-fw fa-paypal"></i>
                         <span class="nav-link-text">
-                            Pages
+                            Pages du site
                         </span>
                     </a>
                 </li>
-                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'categories' ? 'active' : '' }}"
-                    data-toggle="tooltip" data-placement="right" title="Cat&eacute;gories">
-                    <a class="nav-link" href="{{ route('lb_admin.admin.category.index') }}">
-                        <i class="fa fa-fw fa-certificate"></i>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'product_categories' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Cat&eacute;gories des produits">
+                    <a class="nav-link" href="{{ route('lb_admin.admin.product_category.index') }}">
+                        <i class="fa fa-fw fa-product-hunt"></i>
                         <span class="nav-link-text">
-                            Cat&eacute;gories
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Articles">
-                    <a class="nav-link" href="{{ route('lb_admin.admin.posts.index') }}">
-                        <i class="fa fa-fw fa-newspaper-o"></i>
-                        <span class="nav-link-text">
-                            Articles
+                            Cat&eacute;gories des produits
                         </span>
                     </a>
                 </li>
@@ -65,9 +57,48 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'models' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Cat&eacute;gories d'articles">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-fw fa-user-circle"></i>
+                        <span class="nav-link-text">
+                            Mannequins
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'categories' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Cat&eacute;gories d'articles">
+                    <a class="nav-link" href="{{ route('lb_admin.admin.category.index') }}">
+                        <i class="fa fa-fw fa-paper-plane-o"></i>
+                        <span class="nav-link-text">
+                            Cat&eacute;gories d'articles
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'posts' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Articles"
+                >
+                    <a class="nav-link" href="{{ route('lb_admin.admin.posts.index') }}">
+                        <i class="fa fa-fw fa-newspaper-o"></i>
+                        <span class="nav-link-text">
+                            Articles
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'settings' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Paramètres"
+                >
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-fw fa-cogs"></i>
+                        <span class="nav-link-text">
+                            Paramètres de la boutique
+                        </span>
+                    </a>
+                </li>
             @else
                 <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'posts' ? 'active' : '' }}"
-                    data-toggle="tooltip" data-placement="right" title="Articles">
+                    data-toggle="tooltip" data-placement="right" title="Articles"
+                >
                     <a class="nav-link"
                        href="{{ route('lb_admin.user.post.get_user_posts', \Illuminate\Support\Facades\Auth::user()->id) }}">
                         <i class="fa fa-fw fa-newspaper-o"></i>
@@ -85,13 +116,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" href="{{ route('lb_admin.logout') }}">
-                    <i class="fa fa-fw fa-sign-out"></i>Se d&eacute;connecter
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-power-off text-danger"></i>Se d&eacute;connecter
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }} " target="_blank">
-                    <i class="fa fa-fw fa-eye"></i>Voir le site
+                    <i class="fa fa-fw fa-eye text-primary"></i>Voir le site
                 </a>
             </li>
         </ul>

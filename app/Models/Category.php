@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Category
+ * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereSlug($value)
+ */
 class Category extends Model
 {
 
@@ -14,8 +19,4 @@ class Category extends Model
         return $this->belongsToMany(Post::class);
     }
 
-    public function products()
-    {
-        return $this->belongsToMany(Product::class);
-    }
 }

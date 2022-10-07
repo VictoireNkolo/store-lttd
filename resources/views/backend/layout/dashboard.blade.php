@@ -24,7 +24,7 @@
 
 <div id="loader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
 
-@include('backend.partials.sidebar')
+@include('backend.partials.navbar')
 
 <div class="content-wrapper" id="app">
     <div class="container-fluid">
@@ -41,7 +41,7 @@
 
     </div>
     <!-- /.container-fluid-->
-
+    @include('backend.partials.logoutModal')
     @include('backend.partials.footer')
 
 </div>

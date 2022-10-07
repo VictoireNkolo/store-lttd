@@ -76,10 +76,10 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function delete($slug)
+    public function delete($id)
     {
         //dd($slug);
-        $is_deleted = $this->postRepository->delete($slug);
+        $is_deleted = $this->postRepository->delete($id);
         if ($is_deleted) {
             session()->flash('success', 'Suppression effectuée avec succès !');
             return redirect()->route('lb_admin.admin.posts.index');

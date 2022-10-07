@@ -29,31 +29,37 @@ class PostRepository
 
     public function getAll()
     {
-        return $this->post::where(['is_delete' => 0])
+        return $this->post::where(['is_deleted' => 0])
         ->orderBy('title')
-        ->paginate(10);
+        ->paginate(50);
     }
 
     public function getCategoryPosts($slug)
     {
         if ($slug) {
             $query = $this->category->whereSlug($slug)->firstOrFail()->posts();
-            return $query->latest()->paginate(10);
+            return $query->latest()->paginate(20);
         }
 
         $query = Post::query();
-        return $query->latest()->paginate(10);
+        return $query->latest()->paginate(20);
     }
 
     public function getUserPosts($user_id)
     {
-        $query = $this->user->whereId($user_id)->firstOrFail()->posts();
-        return $query->latest()->paginate(10);
+        $query = $this->user->whereId($user_id)
+            ->firstOrFail()
+            ->posts();
+        return $query->latest()
+            ->paginate(50);
     }
 
     public function one($slug)
     {
-        return $this->post::whereSlug($slug)->with('categories')->first();
+        return $this->post::whereSlug($slug)
+            ->with('categories')
+            ->with('user')
+            ->first();
     }
 
     /**
@@ -106,10 +112,12 @@ class PostRepository
 
     /**
      * Soft deletes a post
+     * @param $slug
+     * @return bool
      */
-    public function delete($slug)
+    public function delete($id)
     {
-        $post = $this->post::find($slug);
+        $post = $this->post::find($id);
         $post->is_deleted = 1;
         return $post->save();
     }

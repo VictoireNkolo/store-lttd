@@ -21,7 +21,7 @@ class AdminUserRepository
 
     public function getAll()
     {
-        return $this->user::where('is_delete', 0)->paginate(5);
+        return $this->user::where('is_delete', 0)->paginate(20);
     }
 
     public function delete($id)

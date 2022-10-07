@@ -71,4 +71,5 @@ class CategoryController extends Controller
         session()->flash('error', 'Suppression échouée !');
         return redirect()->back();
     }
+
 }

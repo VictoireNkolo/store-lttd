@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -104,33 +108,41 @@ Route::group(
                 Route::post('category/update', [CategoryController::class, 'update'])->name('lb_admin.admin.category.update');
                 Route::get('category/{id}/delete', [CategoryController::class, 'delete'])->name('lb_admin.admin.category.delete');
 
-                Route::get('posts', 'Admin\PostController@index')->name('lb_admin.admin.posts.index');
-                Route::get('category/{slug}/posts', 'Admin\PostController@index')->name('lb_admin.admin.posts.category');
-                Route::get('user/{user_id}/posts', 'Admin\PostController@index')->name('lb_admin.admin.posts.user');
-                Route::get('post/create', 'Admin\PostController@create')->name('lb_admin.admin.post.create');
-                Route::post('post/store', 'Admin\postController@store')->name('lb_admin.admin.post.store');
-                Route::get('post/{slug}', 'Admin\PostController@show')->name('lb_admin.admin.post.show');
-                Route::get('post/{slug}/edit', 'Admin\PostController@edit')->name('lb_admin.admin.post.edit');
-                Route::post('post/update', 'Admin\postController@update')->name('lb_admin.admin.post.update');
-                Route::get('post/{slug}/delete', 'Admin\PostController@delete')->name('lb_admin.admin.post.delete');
+                Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('lb_admin.admin.product_category.index');
+                Route::get('product_category/create', [ProductCategoryController::class, 'create'])->name('lb_admin.admin.product_category.create');
+                Route::post('product_category/store', [ProductCategoryController::class, 'store'])->name('lb_admin.admin.product_category.store');
+                Route::get('product_category/{id}', [ProductCategoryController::class, 'show'])->name('lb_admin.admin.product_category.show');
+                Route::get('product_category/{id}/edit', [ProductCategoryController::class, 'edit'])->name('lb_admin.admin.product_category.edit');
+                Route::post('product_category/update', [ProductCategoryController::class, 'update'])->name('lb_admin.admin.product_category.update');
+                Route::get('product_category/{id}/delete', [ProductCategoryController::class, 'delete'])->name('lb_admin.admin.product_category.delete');
+
+                Route::get('posts', [PostController::class, 'index'])->name('lb_admin.admin.posts.index');
+                Route::get('category/{slug}/posts', [PostController::class, 'index'])->name('lb_admin.admin.posts.category');
+                Route::get('user/{user_id}/posts', [PostController::class, 'index'])->name('lb_admin.admin.posts.user');
+                Route::get('post/create', [PostController::class, 'create'])->name('lb_admin.admin.post.create');
+                Route::post('post/store', [PostController::class, 'store'])->name('lb_admin.admin.post.store');
+                Route::get('post/{slug}', [PostController::class, 'show'])->name('lb_admin.admin.post.show');
+                Route::get('post/{slug}/edit', [PostController::class, 'edit'])->name('lb_admin.admin.post.edit');
+                Route::post('post/update', [PostController::class, 'update'])->name('lb_admin.admin.post.update');
+                Route::get('post/{slug}/delete', [PostController::class, 'delete'])->name('lb_admin.admin.post.delete');
 
                 //Route::resource('pages', 'Admin\PageController')->except('show');
-                Route::get('pages', 'Admin\PageController@index')->name('lb_admin.admin.pages.index');
-                Route::get('page/create', 'Admin\PageController@create')->name('lb_admin.admin.page.create');
-                Route::post('page/store', 'Admin\PageController@store')->name('lb_admin.admin.page.store');
-                Route::get('page/{id}', 'Admin\PageController@show')->name('lb_admin.admin.page.show');
-                Route::get('page/{id}/edit', 'Admin\PageController@edit')->name('lb_admin.admin.page.edit');
-                Route::post('page/update', 'Admin\PageController@update')->name('lb_admin.admin.page.update');
-                Route::get('page/{id}/delete', 'Admin\PageController@delete')->name('lb_admin.admin.page.delete');
+                Route::get('pages', [PageController::class, 'index'])->name('lb_admin.admin.pages.index');
+                Route::get('page/create', [PageController::class, 'create'])->name('lb_admin.admin.page.create');
+                Route::post('page/store', [PageController::class, 'store'])->name('lb_admin.admin.page.store');
+                Route::get('page/{id}', [PageController::class, 'show'])->name('lb_admin.admin.page.show');
+                Route::get('page/{id}/edit', [PageController::class, 'edit'])->name('lb_admin.admin.page.edit');
+                Route::post('page/update', [PageController::class, 'update'])->name('lb_admin.admin.page.update');
+                Route::get('page/{id}/delete', [PageController::class, 'delete'])->name('lb_admin.admin.page.delete');
 
-                Route::get('products', 'Admin\ProductController@index')->name('lb_admin.admin.products.index');
-                Route::get('category/{slug}/products', 'Admin\ProductController@index')->name('lb_admin.admin.products.category');
-                Route::get('product/create', 'Admin\ProductController@create')->name('lb_admin.admin.product.create');
-                Route::post('product/store', 'Admin\productController@store')->name('lb_admin.admin.product.store');
-                Route::get('product/{id}', 'Admin\ProductController@show')->name('lb_admin.admin.product.show');
-                Route::get('product/{id}/edit', 'Admin\ProductController@edit')->name('lb_admin.admin.product.edit');
-                Route::post('product/update', 'Admin\productController@update')->name('lb_admin.admin.product.update');
-                Route::get('product/{id}/delete', 'Admin\ProductController@delete')->name('lb_admin.admin.product.delete');
+                Route::get('products', [ProductController::class, 'index'])->name('lb_admin.admin.products.index');
+                Route::get('category/{slug}/products', [ProductController::class, 'index'])->name('lb_admin.admin.products.category');
+                Route::get('product/create', [ProductController::class, 'create'])->name('lb_admin.admin.product.create');
+                Route::post('product/store', [ProductController::class, 'store'])->name('lb_admin.admin.product.store');
+                Route::get('product/{id}', [ProductController::class, 'show'])->name('lb_admin.admin.product.show');
+                Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('lb_admin.admin.product.edit');
+                Route::post('product/update', [ProductController::class, 'update'])->name('lb_admin.admin.product.update');
+                Route::get('product/{id}/delete', [ProductController::class, 'delete'])->name('lb_admin.admin.product.delete');
 
             }
         );

@@ -1,6 +1,6 @@
 @extends('backend.layout.dashboard')
 
-@section('title', 'Gestion des articles | LaraBlog')
+@section('title', 'Gestion des articles | LTDD Administration')
 @section('dashboard_section', 'Articles')
 
 @section('content')
@@ -66,11 +66,11 @@
                     <tr>
                     <td> {{ $loop->iteration }} </td>
                     <td>{{$post->title}}</td>
-                    <td>{{$post->description}}</td>
+                    <td>{{substr($post->description, 0, 80)}}...</td>
                     <td class="text-justify">
                         <a href="{{ route('lb_admin.admin.post.edit', $post->slug) }}" title="Modifier"><i class="fa fa-edit text-primary"></i></a>
                         <a href="{{ route('lb_admin.admin.post.show', $post->slug) }}" title="Détails"><i class="fa fa-eye text-success"></i></a>
-                        <a onclick="return confirm('Voulez vous vraiment supprimer cet élément?');" href="{{ route('lb_admin.admin.post.delete', $post->slug) }}" title="Supprimer">
+                        <a onclick="return confirm('Voulez vous vraiment supprimer cet élément?');" href="{{ route('lb_admin.admin.post.delete', $post->id) }}" title="Supprimer">
                             <i class="fa fa-trash-o text-danger"></i>
                         </a>
                     </td>

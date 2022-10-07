@@ -28,18 +28,18 @@ class ProductRepository
     {
         return $this->product::where(['is_deleted' => 0])
         ->orderBy('name')
-        ->paginate(10);
+        ->paginate(100);
     }
 
     public function getCategoryProducts($slug)
     {
         if ($slug) {
             $query = $this->category->whereSlug($slug)->firstOrFail()->products();
-            return $query->latest()->paginate(10);
+            return $query->latest()->paginate(100);
         }
 
         $query = Product::query();
-        return $query->latest()->paginate(10);
+        return $query->latest()->paginate(100);
     }
 
     public function one($id)

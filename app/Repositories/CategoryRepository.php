@@ -22,7 +22,7 @@ class CategoryRepository
     {
         return $this->category::where(['is_deleted' => 0])
             ->orderBy('name')
-            ->paginate(5);
+            ->paginate(20);
     }
 
     public function one($id)
@@ -61,7 +61,9 @@ class CategoryRepository
     }
 
     /**
-     * Sodft deletes a category
+     * Soft deletes a category
+     * @param $id
+     * @return bool
      */
     public function delete($id)
     {
