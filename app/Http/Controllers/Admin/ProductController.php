@@ -3,20 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Repositories\ProductRepository;
 use Intervention\Image\Facades\Image as InterventionImage;
 use Illuminate\Support\Facades\File;
+use function PHPUnit\Framework\directoryExists;
 
 class ProductController extends Controller
 {
 
     private $productRepository;
+    private $imageRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(
+        ProductRepository $productRepository,
+        ImageRepository $imageRepository
+    )
     {
         $this->productRepository = $productRepository;
+        $this->imageRepository = $imageRepository;
     }
 
     public function index(Request $request)
@@ -26,10 +33,9 @@ class ProductController extends Controller
         if ($slug) {
             $products = $this->productRepository->getCategoryProducts($slug);
             return view('backend.admin.products.index', compact('products', 'slug'));
-        } else {
-            $products = $this->productRepository->getAll();
-            return view('backend.admin.products.index', compact('products', 'slug'));
         }
+        $products = $this->productRepository->getAll();
+        return view('backend.admin.products.index', compact('products', 'slug'));
     }
 
     public function create()
@@ -39,7 +45,14 @@ class ProductController extends Controller
 
     public function store(ProductRequest $productRequest)
     {
-        $inputs = $this->getInputs($productRequest);
+        $imgDimensions = [
+            "imgWidth" => 600,
+            "imgHeight" => 800,
+            "thumbWidth" => 200,
+            "thumbHeight" => 260,
+        ];
+        $inputs = $this->imageRepository->getInputs($productRequest, $imgDimensions);
+        $inputs['is_active'] = $productRequest->has('is_active');
         //dd($inputs);
         $is_stored = $this->productRepository->store($inputs);
         if ($is_stored) {
@@ -48,35 +61,6 @@ class ProductController extends Controller
         }
         session()->flash('error', 'Vos données n\'ont pas pu être enrégistrées !');
         return redirect()->back();
-    }
-
-    protected function saveImages($request)
-    {
-        $image = $request->file('image');
-        $name = time() . '.' . $image->extension();
-        $img = InterventionImage::make($image->path());
-        $img->widen(800)->heighten(600)->encode()->save(public_path('/images/') . $name);
-        $img->widen(360)->heighten(260)->encode()->save(public_path('/images/thumbs/') . $name);
-        return $name;
-    }
-
-    protected function getInputs($request)
-    {
-        $inputs = $request->except(['image']);
-        $inputs['is_active'] = $request->has('is_active');
-        if($request->image) {
-            $inputs['image'] = $this->saveImages($request);
-        }
-        return $inputs;
-    }
-
-    protected function deleteImages($id)
-    {
-        $product = $this->productRepository->one($id);
-        File::delete([
-            public_path('/images/') . $product->image,
-            public_path('/images/thumbs/') . $product->image,
-        ]);
     }
 
     public function show($id)
@@ -94,13 +78,13 @@ class ProductController extends Controller
     public function update(ProductRequest $productRequest)
     {
         //dd($productRequest->has('image'));
-
         if($productRequest->has('image')) {
             $id = $productRequest->toArray()['id'];
-            $this->deleteImages($id);
+            $product = $this->productRepository->one($id);
+            $this->imageRepository->deleteImages($product->image);
         }
 
-        $inputs = $this->getInputs($productRequest);
+        $inputs = $this->imageRepository->getInputs($productRequest);
 
         $is_updated = $this->productRepository->update($inputs);
         if ($is_updated) {
@@ -113,8 +97,8 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        //dd($id);
-        $this->deleteImages($id);
+        $product = $this->productRepository->one($id);
+        $this->imageRepository->deleteImages($product->image);
         $is_deleted = $this->productRepository->delete($id);
         if ($is_deleted) {
             session()->flash('success', 'Suppression effectuée avec succès !');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductSubcategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -115,6 +116,15 @@ Route::group(
                 Route::get('product_category/{id}/edit', [ProductCategoryController::class, 'edit'])->name('lb_admin.admin.product_category.edit');
                 Route::post('product_category/update', [ProductCategoryController::class, 'update'])->name('lb_admin.admin.product_category.update');
                 Route::get('product_category/{id}/delete', [ProductCategoryController::class, 'delete'])->name('lb_admin.admin.product_category.delete');
+
+                Route::get('product_subcategories', [ProductSubcategoryController::class, 'index'])->name('lb_admin.admin.product_subcategory.index');
+                Route::get('product_category/{product_category_id}/product_subcategories', [ProductSubcategoryController::class, 'index'])->name('lb_admin.admin.product_subcategories.product_category');
+                Route::get('product_subcategory/create', [ProductSubcategoryController::class, 'create'])->name('lb_admin.admin.product_subcategory.create');
+                Route::post('product_subcategory/store', [ProductSubcategoryController::class, 'store'])->name('lb_admin.admin.product_subcategory.store');
+                Route::get('product_subcategory/{id}', [ProductSubcategoryController::class, 'show'])->name('lb_admin.admin.product_subcategory.show');
+                Route::get('product_subcategory/{id}/edit', [ProductSubcategoryController::class, 'edit'])->name('lb_admin.admin.product_subcategory.edit');
+                Route::post('product_subcategory/update', [ProductSubcategoryController::class, 'update'])->name('lb_admin.admin.product_subcategory.update');
+                Route::get('product_subcategory/{id}/delete', [ProductSubcategoryController::class, 'delete'])->name('lb_admin.admin.product_subcategory.delete');
 
                 Route::get('posts', [PostController::class, 'index'])->name('lb_admin.admin.posts.index');
                 Route::get('category/{slug}/posts', [PostController::class, 'index'])->name('lb_admin.admin.posts.category');

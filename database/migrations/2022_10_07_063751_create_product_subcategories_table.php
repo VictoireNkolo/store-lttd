@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->comment('nom de la sous categorie');
             $table->string('slug')->unique()->comment('Le slug unique par catégorie');
-            $table->string('icon');
+            $table->string('image');
             $table->text('description');
             $table->boolean('is_active')->default(true)->comment('is_active=true si la sous categorie est active');
             $table->boolean('is_deleted')->default(false);

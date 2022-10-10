@@ -52,7 +52,7 @@ class ProductCategoryController extends Controller
         return view('backend.admin.product_categories.edit', ['productCategory' => $productCategory]);
     }
 
-    public function update(productCategoryRequest $request)
+    public function update(ProductCategoryRequest $request)
     {
         $isUpdated = $this->productCategoryRepository->update($request->toArray());
         if ($isUpdated) {

@@ -47,6 +47,15 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'product_subcategories' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Cat&eacute;gories des produits">
+                    <a class="nav-link" href="{{ route('lb_admin.admin.product_subcategory.index') }}">
+                        <i class="fa fa-fw fa-product-hunt"></i>
+                        <span class="nav-link-text">
+                            Sous-cat&eacute;gories des produits
+                        </span>
+                    </a>
+                </li>
                 <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'products' ? 'active' : '' }}"
                     data-toggle="tooltip" data-placement="right" title="Produits"
                 >
