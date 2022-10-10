@@ -1,6 +1,6 @@
 @extends('backend.layout.dashboard')
 
-@section('title', 'Gestion des produits | MOB')
+@section('title', 'Gestion des produits | LTDD Administration')
 @section('dashboard_section', 'Produits')
 
 @section('content')
@@ -27,7 +27,7 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            <i class="fa fa-table"></i> Liste des produits</div>
+            <i class="fa fa-shopping-cart"></i> Liste des produits</div>
         <div class="card-body">
             @if(session()->exists('success'))
                 <div class="alert alert-success">{{ session()->get('success') }}</div>
@@ -40,15 +40,17 @@
                 <thead>
                 <tr>
                     <th>N°</th>
+                    <th>Image</th>
                     <th>Nom</th>
                     <th>Qt&eacute;</th>
-                    <th>Prix</th>
+                    <th>Prix(FCFA)</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
                     <th>N°</th>
+                    <th>Image</th>
                     <th>Nom</th>
                     <th>Qt&eacute;</th>
                     <th>Prix</th>
@@ -59,23 +61,33 @@
                 @foreach ($products as $product)
                     <tr>
                     <td> {{ $loop->iteration }} </td>
+                    <td>
+                        <div class="small mt-1 mb-1 ml-1 mr-1">
+                            <img src="{{ asset('images/thumbs/' . $product->image) }}" alt="{{ $product->name }}" width="5%">
+                        </div>
+                    </td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->quantity}}</td>
                     <td>{{$product->price}}</td>
                     <td class="text-justify">
-                        <a href="{{ route('lb_admin.admin.product.edit', $product->id) }}" title="Modifier"><i class="fa fa-edit text-primary"></i></a>
-                        <a href="{{ route('lb_admin.admin.product.show', $product->id) }}" title="Détails"><i class="fa fa-eye text-success"></i></a>
-                        <a onclick="return confirm('Voulez vous vraiment supprimer cet élément?');" href="{{ route('lb_admin.admin.product.delete', $product->id) }}" title="Supprimer">
+                        <a href="{{ route('lb_admin.admin.product.edit', $product->id) }}" title="Modifier">
+                            <i class="fa fa-edit text-primary"></i>
+                        </a>
+                        <a href="{{ route('lb_admin.admin.product.show', $product->id) }}" title="Détails">
+                            <i class="fa fa-eye text-success"></i>
+                        </a>
+                        <a data-toggle="modal" data-target="#deleteModal" title="Supprimer">
                             <i class="fa fa-trash-o text-danger"></i>
                         </a>
                     </td>
                     </tr>
+                    @include('backend.ui.deleteModal', ['route' => 'lb_admin.admin.product.delete', 'elementId' => $product->id ])
                 @endforeach
                 </tbody>
             </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">Les produits par cat&eacute;gorie</div>
+        <div class="card-footer small text-muted">Gestion des produits par cat&eacute;gorie</div>
         </div>
 
     {{ $products->links() }}

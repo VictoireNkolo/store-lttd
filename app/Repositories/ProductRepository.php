@@ -65,8 +65,9 @@ class ProductRepository
         if (isset($data['image'])) {
             $this->product->image = $data['image'];
         }
-        $this->product->is_active = isset($data['is_active']) ? $data['is_active'] : 0;
+        $this->product->is_active = isset($data['is_active']) ? $data['is_active'] : 1;
         $this->product->is_promoted = isset($data['is_promoted']) ? $data['is_promoted'] : 0;
+        $this->product->is_deleted = 0;
 
         $is_saved = $this->product->save();
         if ($is_saved) {

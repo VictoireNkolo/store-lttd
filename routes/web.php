@@ -118,7 +118,7 @@ Route::group(
                 Route::get('product_category/{id}/delete', [ProductCategoryController::class, 'delete'])->name('lb_admin.admin.product_category.delete');
 
                 Route::get('product_subcategories', [ProductSubcategoryController::class, 'index'])->name('lb_admin.admin.product_subcategory.index');
-                Route::get('product_category/{product_category_id}/product_subcategories', [ProductSubcategoryController::class, 'index'])->name('lb_admin.admin.product_subcategories.product_category');
+                Route::get('product_category/{product_category_id}/product_subcategories', [ProductSubcategoryController::class, 'index'])->name('lb_admin.admin.product_subcategory.product_category');
                 Route::get('product_subcategory/create', [ProductSubcategoryController::class, 'create'])->name('lb_admin.admin.product_subcategory.create');
                 Route::post('product_subcategory/store', [ProductSubcategoryController::class, 'store'])->name('lb_admin.admin.product_subcategory.store');
                 Route::get('product_subcategory/{id}', [ProductSubcategoryController::class, 'show'])->name('lb_admin.admin.product_subcategory.show');

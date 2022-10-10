@@ -1,6 +1,6 @@
 @extends('backend.layout.dashboard')
 
-@section('title', $product->slug.' | LTDD Administration')
+@section('title', $product->slug.' | MOB')
 @section('dashboard_section', 'Produits / '.$product->name)
 
 @section('content')

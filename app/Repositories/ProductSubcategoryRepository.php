@@ -12,16 +12,16 @@ class ProductSubcategoryRepository
 {
 
     /**
-     * @var ProductCategory
+     * @var ProductSubcategory
      */
     private $productSubcategory;
     /**
-     * @var ProductSubcategory
+     * @var ProductCategory
      */
     private $productCategory;
 
     public function __construct(
-        ProductCategory $productSubcategory,
+        ProductSubcategory $productSubcategory,
         ProductCategory $productCategory
     )
     {

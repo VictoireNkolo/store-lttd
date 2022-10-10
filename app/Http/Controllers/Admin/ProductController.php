@@ -7,15 +7,19 @@ use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Repositories\ProductRepository;
-use Intervention\Image\Facades\Image as InterventionImage;
-use Illuminate\Support\Facades\File;
-use function PHPUnit\Framework\directoryExists;
 
 class ProductController extends Controller
 {
 
     private $productRepository;
     private $imageRepository;
+
+    private $imgDimensions = [
+        "imgWidth" => 600,
+        "imgHeight" => 800,
+        "thumbWidth" => 200,
+        "thumbHeight" => 260,
+    ];
 
     public function __construct(
         ProductRepository $productRepository,
@@ -45,14 +49,7 @@ class ProductController extends Controller
 
     public function store(ProductRequest $productRequest)
     {
-        $imgDimensions = [
-            "imgWidth" => 600,
-            "imgHeight" => 800,
-            "thumbWidth" => 200,
-            "thumbHeight" => 260,
-        ];
-        $inputs = $this->imageRepository->getInputs($productRequest, $imgDimensions);
-        $inputs['is_active'] = $productRequest->has('is_active');
+        $inputs = $this->imageRepository->getInputs($productRequest, $this->imgDimensions);
         //dd($inputs);
         $is_stored = $this->productRepository->store($inputs);
         if ($is_stored) {
@@ -84,7 +81,7 @@ class ProductController extends Controller
             $this->imageRepository->deleteImages($product->image);
         }
 
-        $inputs = $this->imageRepository->getInputs($productRequest);
+        $inputs = $this->imageRepository->getInputs($productRequest, $this->imgDimensions);
 
         $is_updated = $this->productRepository->update($inputs);
         if ($is_updated) {
@@ -100,6 +97,7 @@ class ProductController extends Controller
         $product = $this->productRepository->one($id);
         $this->imageRepository->deleteImages($product->image);
         $is_deleted = $this->productRepository->delete($id);
+
         if ($is_deleted) {
             session()->flash('success', 'Suppression effectuée avec succès !');
             return redirect()->route('lb_admin.admin.products.index');

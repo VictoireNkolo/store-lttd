@@ -58,5 +58,5 @@
             </a>
         </div>
     </div>
-    @include('backend.partials.deleteModal', ['route' => 'lb_admin.admin.product_category.delete', 'elementId' => $productCategory->id ])
+    @include('backend.ui.deleteModal', ['route' => 'lb_admin.admin.product_category.delete', 'elementId' => $productCategory->id ])
 @endsection

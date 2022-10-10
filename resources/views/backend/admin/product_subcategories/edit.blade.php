@@ -1,6 +1,6 @@
 @extends('backend.layout.dashboard')
 
-@section('title', 'Editer un produit | LTDD Administration')
+@section('title', 'Editer un produit | MOB')
 @section('dashboard_section', 'Mise à jour produit')
 
 @section('content')

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductSubcategoryRequest;
+use App\Repositories\ImageRepository;
 use App\Repositories\ProductSubcategoryRepository;
 use Illuminate\Http\Request;
 
@@ -13,22 +14,40 @@ class ProductSubcategoryController extends Controller
 {
 
     private $productSubcategoryRepository;
+    private $imageRepository;
 
-    public function __construct(ProductSubcategoryRepository $repository)
+    private $imgDimensions = [
+        "imgWidth" => 600,
+        "imgHeight" => 800,
+        "thumbWidth" => 200,
+        "thumbHeight" => 260,
+    ];
+
+    public function __construct(
+        ProductSubcategoryRepository $repository,
+        ImageRepository $imageRepository
+    )
     {
         $this->productSubcategoryRepository = $repository;
+        $this->imageRepository = $imageRepository;
     }
 
     public function index(Request $request)
     {
-        $product_category_id = $request->route('product_category_id');
+        $productCategoryId = $request->route('product_category_id');
 
-        if ($product_category_id) {
-            $productSubcategories = $this->productSubcategoryRepository->getProductCategoryProductSubcategories($product_category_id);
-            return view('backend.admin.product_subcategories.index', compact('productSubcategories', 'product_category_id'));
+        if ($productCategoryId) {
+            $productSubcategories = $this->productSubcategoryRepository->getProductCategoryProductSubcategories($productCategoryId);
+            return view('backend.admin.product_subcategories.index', compact('productSubcategories', 'productCategoryId'));
         }
         $productSubcategories = $this->productSubcategoryRepository->getAll();
-        return view('backend.admin.product_subcategories.index', ['productSubcategories' => $productSubcategories]);
+        return view(
+            'backend.admin.product_subcategories.index',
+            [
+                'productSubcategories' => $productSubcategories,
+                'productCategoryId' => $productCategoryId
+            ]
+        );
     }
 
     public function create()
@@ -38,7 +57,9 @@ class ProductSubcategoryController extends Controller
 
     public function store(ProductSubcategoryRequest $request)
     {
-        $is_stored = $this->productSubcategoryRepository->store($request->toArray());
+        $inputs = $this->imageRepository->getInputs($request, $this->imgDimensions);
+        $is_stored = $this->productSubcategoryRepository->store($inputs);
+
         if ($is_stored) {
             session()->flash('success', 'Sous-Catégorie créée avec succès !');
             return redirect()->route('lb_admin.admin.product_subcategory.index');
@@ -61,7 +82,15 @@ class ProductSubcategoryController extends Controller
 
     public function update(productSubcategoryRequest $request)
     {
-        $isUpdated = $this->productSubcategoryRepository->update($request->toArray());
+        if($request->has('image')) {
+            $id = $request->toArray()['id'];
+            $item = $this->productSubcategoryRepository->one($id);
+            $this->imageRepository->deleteImages($item->image);
+        }
+
+        $inputs = $this->imageRepository->getInputs($request, $this->imgDimensions);
+
+        $isUpdated = $this->productSubcategoryRepository->update($inputs);
         if ($isUpdated) {
             session()->flash('success', 'Sous-Catégorie mise à jour avec succès !');
             return redirect()->route('lb_admin.admin.product_subcategory.index');
@@ -72,9 +101,11 @@ class ProductSubcategoryController extends Controller
 
     public function delete($id)
     {
-        $this->deleteImages($id);
-        $is_deleted = $this->productSubcategoryRepository->delete($id);
-        if ($is_deleted) {
+        $item = $this->productSubcategoryRepository->one($id);
+        $this->imageRepository->deleteImages($item->image);
+        $isDeleted = $this->productSubcategoryRepository->delete($id);
+
+        if ($isDeleted) {
             session()->flash('success', 'Suppression effectuée avec succès !');
             return redirect()->route('lb_admin.admin.product_subcategory.index');
         }

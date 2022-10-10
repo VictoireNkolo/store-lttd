@@ -41,12 +41,12 @@
             </div>
         </div>
         <div class="card-footer text-muted">
-            Est active : {!! $category->is_active ? '<i class="fa fa-thumbs-up text-primary"></i>' : '<i class="fa fa-thumbs-down text-danger"></i>' !!} |
+            Est active : {!! $category->is_active ? '<i class="fa fa-thumbs-up text-success"></i>' : '<i class="fa fa-thumbs-down text-danger"></i>' !!} |
             <a href="{{ route('lb_admin.admin.category.edit', $category->id) }}" title="Modifier"><i class="fa fa-edit text-primary"></i></a> |
             <a data-toggle="modal" data-target="#deleteModal" title="Supprimer">
                 <i class="fa fa-trash-o text-danger"></i>
             </a>
         </div>
     </div>
-    @include('backend.partials.deleteModal', ['route' => 'lb_admin.admin.category.delete', 'elementId' => $category->id ])
+    @include('backend.ui.deleteModal', ['route' => 'lb_admin.admin.category.delete', 'elementId' => $category->id ])
 @endsection

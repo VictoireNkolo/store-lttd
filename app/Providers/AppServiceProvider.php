@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\ProductCategory;
+use App\Models\ProductSubcategory;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductCategoryRepository;
+use App\Repositories\ProductSubcategoryRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\PageRepository;
 use Illuminate\Support\ServiceProvider;
@@ -14,10 +19,16 @@ class AppServiceProvider extends ServiceProvider
 {
 
     public $pageRepository;
+    public $categoryRepository;
+    public $productCategoryRepository;
+    public $productSubcategoryRepository;
 
     public function __construct()
     {
         $this->pageRepository = resolve(PageRepository::class);
+        $this->categoryRepository = resolve(CategoryRepository::class);
+        $this->productCategoryRepository = resolve(ProductCategoryRepository::class);
+        $this->productSubcategoryRepository = resolve(ProductSubcategoryRepository::class);
     }
 
     /**
@@ -44,8 +55,12 @@ class AppServiceProvider extends ServiceProvider
             'backend.admin.products.index',
             'backend.admin.products.create',
             'backend.admin.products.edit',
+            'backend.admin.product_subcategories.index',
+            'backend.admin.product_subcategories.create',
+            'backend.admin.product_subcategories.edit',
         ], function ($view) {
-            $view->with('categories', Category::all());
+            $view->with('categories', $this->categoryRepository->getAll());
+            $view->with('productCategories', $this->productCategoryRepository->getAll());
             $view->with('users', User::all());
         });
 

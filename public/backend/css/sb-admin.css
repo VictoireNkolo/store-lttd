@@ -476,3 +476,13 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+select option.sb-active {
+    color: #000 !important;
+    background-color: #0682f3;
+}
+
+select option[selected]{
+    color: #FFFFFF !important;
+    background-color: #0682f3;
+}

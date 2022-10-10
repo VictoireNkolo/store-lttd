@@ -41,7 +41,7 @@
 
     </div>
     <!-- /.container-fluid-->
-    @include('backend.partials.logoutModal')
+    @include('backend.ui.logoutModal')
     @include('backend.partials.footer')
 
 </div>
