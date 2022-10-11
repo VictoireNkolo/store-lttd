@@ -1,7 +1,7 @@
 @extends('backend.layout.dashboard')
 
 @section('title', 'Editer un article | LaraBlog')
-@section('dashboard_section', 'Mettre à jour un article')
+@section('dashboard_section', 'Mettre à jour un article / '.$post->slug)
 
 @section('content')
 

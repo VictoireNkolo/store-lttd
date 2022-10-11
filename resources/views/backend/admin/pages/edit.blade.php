@@ -1,7 +1,7 @@
 @extends('backend.layout.dashboard')
 
 @section('title', 'Editer une page | MOB')
-@section('dashboard_section', 'Mise à jour page')
+@section('dashboard_section', 'Mise à jour page / '.$page->slug)
 
 @section('content')
 

@@ -15,7 +15,7 @@
                                 value="{{ route('lb_admin.admin.product_subcategory.index') }}"
                                 @unless($productCategoryId) selected @endunless
                             >
-                                Cat&eacute;gories parentes
+                                Toutes les cat&eacute;gories
                             </option>
                             @foreach($productCategories as $productCategory)
                                 <option

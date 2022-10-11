@@ -52,9 +52,6 @@ class AppServiceProvider extends ServiceProvider
             'backend.admin.posts.index',
             'backend.admin.posts.create',
             'backend.admin.posts.edit',
-            'backend.admin.products.index',
-            'backend.admin.products.create',
-            'backend.admin.products.edit',
             'backend.admin.product_subcategories.index',
             'backend.admin.product_subcategories.create',
             'backend.admin.product_subcategories.edit',
@@ -64,7 +61,22 @@ class AppServiceProvider extends ServiceProvider
             $view->with('users', User::all());
         });
 
-        View::composer(['backend.admin.pages.create', 'backend.admin.pages.edit'], function ($view) {
+        View::composer(
+            [
+                'backend.admin.products.index',
+                'backend.admin.products.create',
+                'backend.admin.products.edit',
+            ],
+            function ($view) {
+                $view->with('productCategories', $this->productCategoryRepository->getAll());
+                $view->with('productSubcategories', $this->productSubcategoryRepository->getAll());
+            }
+        );
+
+        View::composer([
+            'backend.admin.pages.create',
+            'backend.admin.pages.edit'
+        ], function ($view) {
             $view->with('pages', $this->pageRepository->getAllActive());
         });
 
@@ -82,7 +94,9 @@ class AppServiceProvider extends ServiceProvider
             'frontend.pages.shop',
             'frontend.pages.index',
         ], function ($view) {
-            $view->with('categories', Category::all());
+            $view->with('categories', $this->categoryRepository->getAll());
+            $view->with('productCategories', $this->productCategoryRepository->getAll());
+            $view->with('productSubcategories', $this->productSubcategoryRepository->getAll());
         });
     }
 }

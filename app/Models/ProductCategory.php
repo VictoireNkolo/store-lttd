@@ -19,7 +19,7 @@ class ProductCategory extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function productSubcategories()
+    public function product_subcategories()
     {
         return $this->hasMany(ProductSubcategory::class);
     }

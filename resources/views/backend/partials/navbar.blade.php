@@ -67,11 +67,20 @@
                     </a>
                 </li>
                 <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'models' ? 'active' : '' }}"
-                    data-toggle="tooltip" data-placement="right" title="Cat&eacute;gories d'articles">
+                    data-toggle="tooltip" data-placement="right" title="Mannequins">
                     <a class="nav-link" href="#">
                         <i class="fa fa-fw fa-user-circle"></i>
                         <span class="nav-link-text">
                             Mannequins
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'partners' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Partenaires">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-fw fa-handshake-o"></i>
+                        <span class="nav-link-text">
+                            Partenaires
                         </span>
                     </a>
                 </li>

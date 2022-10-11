@@ -11,7 +11,7 @@ class ProductSubcategory extends Model
 
     public $guarded = [];
 
-    public function productCategory()
+    public function product_category()
     {
         return $this->belongsTo(ProductCategory::class);
     }

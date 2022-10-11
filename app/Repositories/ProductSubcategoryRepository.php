@@ -40,7 +40,7 @@ class ProductSubcategoryRepository
     {
         $query = $this->productCategory->whereId($product_category_id)
             ->firstOrFail()
-            ->productSubcategories();
+            ->product_subcategories();
         return $query->paginate(50);
     }
 

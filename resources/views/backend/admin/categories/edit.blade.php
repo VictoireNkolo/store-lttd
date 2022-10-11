@@ -1,7 +1,7 @@
 @extends('backend.layout.dashboard')
 
 @section('title', 'Gestion categories-articles | LTDD Administration')
-@section('dashboard_section', 'Mise à jour catégorie-articles')
+@section('dashboard_section', 'Mise à jour catégorie-articles / '.$category->slug)
 
 @section('content')
 
