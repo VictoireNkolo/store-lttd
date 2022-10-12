@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ModelController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductSubcategoryController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -154,6 +157,29 @@ Route::group(
                 Route::post('product/update', [ProductController::class, 'update'])->name('lb_admin.admin.product.update');
                 Route::get('product/{id}/delete', [ProductController::class, 'delete'])->name('lb_admin.admin.product.delete');
 
+                Route::get('models', [ModelController::class, 'index'])->name('lb_admin.admin.models.index');
+                Route::get('model/create', [ModelController::class, 'create'])->name('lb_admin.admin.model.create');
+                Route::post('model/store', [ModelController::class, 'store'])->name('lb_admin.admin.model.store');
+                Route::get('model/{id}', [ModelController::class, 'show'])->name('lb_admin.admin.model.show');
+                Route::get('model/{id}/edit', [ModelController::class, 'edit'])->name('lb_admin.admin.model.edit');
+                Route::post('model/update', [ModelController::class, 'update'])->name('lb_admin.admin.model.update');
+                Route::get('model/{id}/delete', [ModelController::class, 'delete'])->name('lb_admin.admin.model.delete');
+
+                Route::get('partners', [PartnerController::class, 'index'])->name('lb_admin.admin.partners.index');
+                Route::get('partner/create', [PartnerController::class, 'create'])->name('lb_admin.admin.partner.create');
+                Route::post('partner/store', [PartnerController::class, 'store'])->name('lb_admin.admin.partner.store');
+                Route::get('partner/{id}', [PartnerController::class, 'show'])->name('lb_admin.admin.partner.show');
+                Route::get('partner/{id}/edit', [PartnerController::class, 'edit'])->name('lb_admin.admin.partner.edit');
+                Route::post('partner/update', [PartnerController::class, 'update'])->name('lb_admin.admin.partner.update');
+                Route::get('partner/{id}/delete', [PartnerController::class, 'delete'])->name('lb_admin.admin.partner.delete');
+
+                Route::get('testimonials', [TestimonialController::class, 'index'])->name('lb_admin.admin.testimonials.index');
+                Route::get('testimonial/create', [TestimonialController::class, 'create'])->name('lb_admin.admin.testimonial.create');
+                Route::post('testimonial/store', [TestimonialController::class, 'store'])->name('lb_admin.admin.testimonial.store');
+                Route::get('testimonial/{id}', [TestimonialController::class, 'show'])->name('lb_admin.admin.testimonial.show');
+                Route::get('testimonial/{id}/edit', [TestimonialController::class, 'edit'])->name('lb_admin.admin.testimonial.edit');
+                Route::post('testimonial/update', [TestimonialController::class, 'update'])->name('lb_admin.admin.testimonial.update');
+                Route::get('testimonial/{id}/delete', [TestimonialController::class, 'delete'])->name('lb_admin.admin.testimonial.delete');
             }
         );
     }

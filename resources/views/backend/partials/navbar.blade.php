@@ -68,7 +68,7 @@
                 </li>
                 <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'models' ? 'active' : '' }}"
                     data-toggle="tooltip" data-placement="right" title="Mannequins">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('lb_admin.admin.models.index') }}">
                         <i class="fa fa-fw fa-user-circle"></i>
                         <span class="nav-link-text">
                             Mannequins
@@ -77,7 +77,7 @@
                 </li>
                 <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'partners' ? 'active' : '' }}"
                     data-toggle="tooltip" data-placement="right" title="Partenaires">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('lb_admin.admin.partners.index') }}">
                         <i class="fa fa-fw fa-handshake-o"></i>
                         <span class="nav-link-text">
                             Partenaires
@@ -86,7 +86,7 @@
                 </li>
                 <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'testimonials' ? 'active' : '' }}"
                     data-toggle="tooltip" data-placement="right" title="Témoignages">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('lb_admin.admin.testimonials.index') }}">
                         <i class="fa fa-fw fa-thumbs-up"></i>
                         <span class="nav-link-text">
                             T&eacute;moignages

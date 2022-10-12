@@ -80,7 +80,7 @@ class ProductSubcategoryController extends Controller
         return view('backend.admin.product_subcategories.edit', ['productSubcategory' => $productSubcategory]);
     }
 
-    public function update(productSubcategoryRequest $request)
+    public function update(ProductSubcategoryRequest $request)
     {
         if($request->has('image')) {
             $id = $request->toArray()['id'];

@@ -29,7 +29,7 @@ class ProductCategoryController extends Controller
         return view('backend.admin.product_categories.create');
     }
 
-    public function store(productCategoryRequest $request)
+    public function store(ProductCategoryRequest $request)
     {
         $is_stored = $this->productCategoryRepository->store($request->toArray());
         if ($is_stored) {
