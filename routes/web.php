@@ -146,7 +146,7 @@ Route::group(
                 Route::get('page/{id}/delete', [PageController::class, 'delete'])->name('lb_admin.admin.page.delete');
 
                 Route::get('products', [ProductController::class, 'index'])->name('lb_admin.admin.products.index');
-                Route::get('category/{slug}/products', [ProductController::class, 'index'])->name('lb_admin.admin.products.category');
+                Route::get('product_subcategory/{slug}/products', [ProductController::class, 'index'])->name('lb_admin.admin.products.product_subcategory');
                 Route::get('product/create', [ProductController::class, 'create'])->name('lb_admin.admin.product.create');
                 Route::post('product/store', [ProductController::class, 'store'])->name('lb_admin.admin.product.store');
                 Route::get('product/{id}', [ProductController::class, 'show'])->name('lb_admin.admin.product.show');

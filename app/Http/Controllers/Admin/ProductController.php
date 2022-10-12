@@ -35,7 +35,7 @@ class ProductController extends Controller
         $slug = $request->route('slug');
         //dd("slug: $slug");
         if ($slug) {
-            $products = $this->productRepository->getCategoryProducts($slug);
+            $products = $this->productRepository->getSubcategoryProducts($slug);
             return view('backend.admin.products.index', compact('products', 'slug'));
         }
         $products = $this->productRepository->getAll();

@@ -11,9 +11,14 @@
                 <div class="card-body text-secondary">
                     <div class="d-inline-block">
                             <select onchange="window.location.href = this.value">
-                            <option value="{{ route('lb_admin.admin.products.index') }}" @unless($slug) selected @endunless>Toutes cat&eacute;gories</option>
-                            @foreach($categories as $category)
-                                <option value="{{ route('lb_admin.admin.products.category', ['slug' => $category->slug]) }}" {{ $slug == $category->slug ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ route('lb_admin.admin.products.index') }}" @unless($slug) selected @endunless>Toutes les cat&eacute;gories</option>
+                            @foreach($productCategories as $productCategory)
+                                <option
+                                    value="{{ route('lb_admin.admin.products.category', ['slug' => $productCategory->slug]) }}"
+                                    {{ $slug == $productCategory->slug ? 'selected' : '' }}
+                                >
+                                    {{ $productCategory->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -87,7 +92,7 @@
             </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">Gestion des produits par cat&eacute;gorie</div>
+        <div class="card-footer small text-muted">Gestion des produits</div>
         </div>
 
     {{ $products->links() }}

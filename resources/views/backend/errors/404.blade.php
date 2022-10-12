@@ -1,6 +1,6 @@
 @extends('backend.layout.page')
 
-@section('title', 'Erreur 404 | LaraBlog')
+@section('title', 'Erreur 404 | LTDD Administration')
 
 @section('content')
 

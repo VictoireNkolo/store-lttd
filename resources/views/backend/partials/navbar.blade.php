@@ -84,6 +84,15 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'testimonials' ? 'active' : '' }}"
+                    data-toggle="tooltip" data-placement="right" title="Témoignages">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-fw fa-thumbs-up"></i>
+                        <span class="nav-link-text">
+                            T&eacute;moignages
+                        </span>
+                    </a>
+                </li>
                 <li class="nav-item {{ substr(Route::current()->uri(), 14) === 'categories' ? 'active' : '' }}"
                     data-toggle="tooltip" data-placement="right" title="Cat&eacute;gories d'articles">
                     <a class="nav-link" href="{{ route('lb_admin.admin.category.index') }}">

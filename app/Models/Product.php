@@ -9,12 +9,7 @@ class Product extends Model
 
     public $guarded = [];
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
-
-    public function productSubcategories()
+    public function product_subcategories()
     {
         return $this->belongsToMany(ProductSubcategory::class);
     }

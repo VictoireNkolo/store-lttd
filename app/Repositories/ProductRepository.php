@@ -5,9 +5,8 @@ namespace App\Repositories;
 
 
 use App\Models\Product;
-use App\Models\Category;
+use App\Models\ProductSubcategory;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
 
 class ProductRepository
 {
@@ -16,12 +15,15 @@ class ProductRepository
      * @var Product
      */
     private $product;
-    private $category;
+    /**
+     * @var ProductSubcategory
+     */
+    private $productSubcategory;
 
-    public function __construct(Product $product, Category $category)
+    public function __construct(Product $product, ProductSubcategory $productSubcategory)
     {
         $this->product = $product;
-        $this->category = $category;
+        $this->productSubcategory = $productSubcategory;
     }
 
     public function getAll()
@@ -31,10 +33,13 @@ class ProductRepository
         ->paginate(100);
     }
 
-    public function getCategoryProducts($slug)
+    public function getSubcategoryProducts($slug)
     {
         if ($slug) {
-            $query = $this->category->whereSlug($slug)->firstOrFail()->products();
+            $query = $this->productSubcategory
+                ->whereSlug($slug)
+                ->firstOrFail()
+                ->products();
             return $query->latest()->paginate(100);
         }
 
@@ -44,13 +49,16 @@ class ProductRepository
 
     public function one($id)
     {
-        return $this->product::whereId($id)->with('categories')->first();
+        return $this->product::whereId($id)
+            ->with('product_subcategories')
+            ->first();
     }
 
     /**
      * Creates a product
      *
      * @param array $data
+     * @return bool
      */
     public function store(array $data)
     {
@@ -71,7 +79,7 @@ class ProductRepository
 
         $is_saved = $this->product->save();
         if ($is_saved) {
-            $this->product->categories()->attach($data['categories']);
+            $this->product->product_subcategories()->attach($data['product_subcategories']);
             return true;
         }
         return false;
@@ -79,7 +87,7 @@ class ProductRepository
 
     /**
      * Updates a product
-     * @param array $arrData
+     * @param array $data
      */
     public function update(array $data)
     {
@@ -101,7 +109,7 @@ class ProductRepository
 
         $is_saved = $product->save();
         if ($is_saved) {
-            $product->categories()->sync($data['categories']);
+            $product->product_subcategories()->sync($data['product_subcategories']);
             return true;
         }
         return false;

@@ -76,12 +76,12 @@
             </div>
             <div class="list-group list-group-flush small">
                 <ul>
-                    @foreach ($product->categories as $category)
+                    @foreach ($product->product_subcategories as $product_subcategory)
                         <li>
-                            <a class="list-group-item list-group-item-action" href="{{ route('lb_admin.admin.products.category', $category->slug) }}">
+                            <a class="list-group-item list-group-item-action" href="{{ route('lb_admin.admin.products.product_subcategory', $product_subcategory->slug) }}">
                                 <div class="media">
                                     <div class="media-body">
-                                        <strong>{{ $category->name }}</strong>
+                                        <strong>{{ $product_subcategory->name }}</strong>
                                     </div>
                                 </div>
                             </a>

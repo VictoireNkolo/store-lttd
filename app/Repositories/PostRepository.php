@@ -37,7 +37,10 @@ class PostRepository
     public function getCategoryPosts($slug)
     {
         if ($slug) {
-            $query = $this->category->whereSlug($slug)->firstOrFail()->posts();
+            $query = $this->category
+                ->whereSlug($slug)
+                ->firstOrFail()
+                ->posts();
             return $query->latest()->paginate(20);
         }
 
@@ -47,7 +50,8 @@ class PostRepository
 
     public function getUserPosts($user_id)
     {
-        $query = $this->user->whereId($user_id)
+        $query = $this->user
+            ->whereId($user_id)
             ->firstOrFail()
             ->posts();
         return $query->latest()
